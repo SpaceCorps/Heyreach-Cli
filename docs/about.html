@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About · HeyReach CLI</title>
+  <meta name="description" content="About HeyReach CLI: High-performance open source native Rust command-line tool and agent interface for the HeyReach LinkedIn outreach API.">
+  <link rel="canonical" href="https://spacecorps.github.io/Heyreach-Cli/about.html">
+  <meta property="og:title" content="About · HeyReach CLI">
+  <meta property="og:description" content="About HeyReach CLI: High-performance open source native Rust command-line tool and agent interface for the HeyReach LinkedIn outreach API.">
+  <meta property="og:url" content="https://spacecorps.github.io/Heyreach-Cli/about.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://spacecorps.github.io/Heyreach-Cli/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="is-agentic-site-type" content="content">
+  <style>
+    body { background: #090d16; color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.7; padding: 40px 20px; }
+    .content-box { max-width: 800px; margin: 0 auto; background: rgba(22, 27, 46, 0.7); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 40px; }
+    h1 { font-size: 2.2rem; margin-bottom: 20px; color: #fff; }
+    h2 { font-size: 1.4rem; margin-top: 30px; margin-bottom: 12px; color: #38bdf8; }
+    p { margin-bottom: 16px; color: #94a3b8; }
+    a { color: #38bdf8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back { display: inline-block; margin-bottom: 24px; color: #6366f1; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <div class="content-box">
+    <a href="./" class="back">&larr; Back to HeyReach CLI</a>
+    <h1>About HeyReach CLI</h1>
+    
+    <p>HeyReach CLI is a high-performance, open-source command-line tool and programmatic automation interface designed specifically for the HeyReach LinkedIn outreach platform. Maintained under the SpaceCorps engineering collective, the project provides developers, growth engineers, and autonomous AI agents with a single, standalone native binary capable of operating seamlessly across macOS, Linux, and Windows without runtime dependencies or interpreter overhead.</p>
+
+    <h2>Project Lineage & Motivation</h2>
+    <p>The original prototype CLI was created as a .NET global tool (`Heyreach.Console`) by Niels Bosma. In 2026, under the SpaceCorps CLI porting blueprint, the entire tool was re-architected as a native Rust 2024 binary (`heyreach`). This transition eliminates runtime startup overhead, achieving cold-start latencies of 1 to 3 milliseconds, and introduces secure OS keystore storage, deterministic multi-account scoping, and complete agent self-documentation via <code>heyreach agent-readme</code>.</p>
+
+    <h2>Architectural Tenets</h2>
+    <p>HeyReach CLI adheres to the core SpaceCorps standards:</p>
+    <ul>
+      <li><strong>Native Performance:</strong> Single static binary with zero runtime dependencies and fast cold starts.</li>
+      <li><strong>Security First:</strong> Native hardware-backed credential storage via macOS Keychain, Windows DPAPI, and Linux Secret Service.</li>
+      <li><strong>Agentic Native:</strong> Structured YAML output by default, raw JSON via <code>--json</code>, and standardized exit codes.</li>
+      <li><strong>Deterministic Multi-Account:</strong> Multi-tenant isolation with <code>--account &lt;name&gt;</code> to prevent accidental cross-tenant execution.</li>
+    </ul>
+
+    <h2>Open Source & Community</h2>
+    <p>HeyReach CLI is licensed under the permissive MIT License. Full source code, test suites, and documentation are hosted publicly at <a href="https://github.com/SpaceCorps/Heyreach-Cli" target="_blank" rel="noopener noreferrer">github.com/SpaceCorps/Heyreach-Cli</a>.</p>
+  </div>
+</body>
+</html>

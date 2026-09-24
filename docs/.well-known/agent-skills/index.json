@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "heyreach-cli",
+      "description": "Automate LinkedIn campaigns, manage lead lists, monitor sender accounts, send messages, and register webhooks via native Rust CLI.",
+      "type": "skill-md",
+      "url": "https://spacecorps.github.io/Heyreach-Cli/llms.txt",
+      "digest": "sha256:323a2d1bfc09c4542c172f5dbff4e03718120c378b4a69846d1d269a26e56b14"
+    }
+  ]
+}

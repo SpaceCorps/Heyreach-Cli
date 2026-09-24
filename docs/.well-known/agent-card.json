@@ -1,0 +1,17 @@
+{
+  "name": "HeyReach CLI Agent",
+  "description": "Agent interface and LinkedIn outreach automation tool for HeyReach API.",
+  "url": "https://spacecorps.github.io/Heyreach-Cli/",
+  "version": "1.0.0",
+  "capabilities": ["campaigns", "leads", "senders", "conversations", "webhooks", "analytics"],
+  "skills": [
+    {
+      "name": "heyreach-cli",
+      "url": "https://spacecorps.github.io/Heyreach-Cli/llms.txt"
+    }
+  ],
+  "contact": {
+    "email": "contact@spacecorps.dev",
+    "url": "https://spacecorps.github.io/Heyreach-Cli/contact.html"
+  }
+}

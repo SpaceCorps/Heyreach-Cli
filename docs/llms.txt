@@ -1,0 +1,69 @@
+# HeyReach CLI
+
+> High-performance native Rust CLI and autonomous agent interface for the HeyReach LinkedIn outreach API. Built for developers, growth teams, and agent tool loops.
+
+## When to Use This CLI
+
+Use the `heyreach` CLI whenever you need to:
+- **Manage outreach campaigns:** List, inspect, pause, resume campaigns, and stop specific leads.
+- **Bulk lead ingestion:** Ingest lead lists from JSON files or unix pipes directly into campaigns.
+- **Lead list management:** Create user or company lists, query leads, add profile URLs, and delete contacts.
+- **LinkedIn sender accounts:** Inspect connected LinkedIn accounts, monitor sender limits, and query network connections.
+- **Conversations & messaging:** Query LinkedIn outreach conversations and send messages programmatically.
+- **Analytics & metrics:** Extract performance metrics across date ranges, campaigns, and sender accounts.
+- **Webhook orchestration:** Register, update, and manage webhook subscribers for real-time outreach event notifications.
+- **Agentic automation:** Drive outreach workflows deterministically with `--json` output and stable exit codes.
+
+Do NOT use this tool if:
+- You need graphical outreach sequence builders (use the web UI at https://app.heyreach.io).
+- You are trying to interact with non-HeyReach outreach tools or email platforms.
+
+## Core Agent Operating Principles
+
+1. **Authentication Options:**
+   - **Named Accounts (Keystore):** Store your API key via `heyreach login <name>` or `heyreach accounts add <name> --api-key <key>`, then pass `-a, --account <name>`.
+   - **Environment Variable:** Set `HEYREACH_API_KEY="your-key"`.
+   - **Direct Flag:** Pass `--api-key <key>` directly.
+2. **Machine-Readable Outputs:** Pass `--json` (or `--format json`) when piping into `jq` or autonomous agent loops.
+3. **Pagination Standards:** List commands support `--limit <N>` and `--offset <N>`.
+4. **Error Handling & Remediation:** All errors output structured envelopes to stderr with stable machine-readable error codes (`auth_required`, `not_found`, `rate_limited`, `invalid_input`, `no_account`).
+
+## Key Command Patterns
+
+### Authentication & Accounts
+- `heyreach auth check`: Verify API key validity.
+- `heyreach login [name]`: Interactively authenticate and store key in OS keystore.
+- `heyreach accounts list --check`: Check validity of all stored accounts.
+
+### Campaigns
+- `heyreach campaigns list [--status active|paused|draft|completed] --json`: List campaigns.
+- `heyreach campaigns get <id> --json`: Get campaign details.
+- `heyreach campaigns pause <id>`: Pause a campaign.
+- `heyreach campaigns resume <id>`: Resume a campaign.
+- `cat leads.json | heyreach campaigns add-leads <id>`: Ingest leads into campaign.
+- `heyreach campaigns stop-lead <campaign-id> --lead <lead-id>`: Stop a lead.
+
+### Lead Lists & Leads
+- `heyreach lists list --json`: List lead lists.
+- `heyreach lists create --name "Q1 Prospects" [--type user|company]`: Create list.
+- `heyreach lists leads <id> [--keyword "engineer"] --json`: Get leads in list.
+- `heyreach lists add-lead <id> --linkedin-url "https://linkedin.com/in/target"`: Add lead to list.
+- `heyreach leads get --linkedin-url "https://linkedin.com/in/target" --json`: Lookup lead.
+- `heyreach leads update-status --lead <id> --status contacted`: Update lead status.
+
+### Senders & Conversations
+- `heyreach senders list --json`: List LinkedIn senders.
+- `heyreach senders network <id> --json`: Get connections of sender.
+- `heyreach conversations list [--campaign-id <id>] --json`: Query conversations.
+- `heyreach conversations send --lead <lead-id> --message "Hello!"`: Send message.
+
+### Analytics & Webhooks
+- `heyreach stats get [--from YYYY-MM-DD] [--to YYYY-MM-DD] --json`: Query outreach analytics.
+- `heyreach webhooks list --json`: List webhooks.
+- `heyreach webhooks create --name "Reply hook" --url "https://api.site/hook" --event message_reply`: Register webhook.
+
+## Documentation & Discovery
+- Landing Page: https://spacecorps.github.io/Heyreach-Cli/
+- Exhaustive Agent Manual: https://spacecorps.github.io/Heyreach-Cli/llms-full.txt
+- HeyReach API Reference: https://documenter.getpostman.com/view/23808049/2sA2xb5F75
+- GitHub Repository: https://github.com/SpaceCorps/Heyreach-Cli

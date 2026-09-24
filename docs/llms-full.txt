@@ -1,0 +1,86 @@
+# HeyReach CLI - Comprehensive Agent Reference Manual
+
+> An exhaustive technical manual for autonomous agents driving the HeyReach CLI (`heyreach`). Covers all commands and endpoints for the HeyReach LinkedIn Outreach API.
+
+## When To Use This Tool
+- Automated LinkedIn outreach campaign orchestration (pause, resume, inspect).
+- Programmatic lead ingestion from CSV/JSON data pipelines.
+- Multi-sender account monitoring, connection discovery, and message delivery.
+- Real-time webhook configuration for CRM synchronization.
+- Automated outreach performance reporting and analytics extraction.
+
+## Exit Codes and Error Envelopes
+
+Every error response on stderr conforms to the standard envelope structure:
+```json
+{
+  "error": "Human readable summary",
+  "code": "error_code_string",
+  "detail": "Extended debugging context or HTTP status body",
+  "remediation": "Exact command or action needed to fix"
+}
+```
+
+Exit code numbers match the error code contract:
+- `0`: Success
+- `1`: `error` - Unclassified or general error
+- `2`: `network` - Transport failure, connection timeout, or 5xx server error
+- `3`: `auth_required` - API key rejected, missing, or unauthorized
+- `4`: `not_found` - Resource ID or endpoint does not exist
+- `5`: `rate_limited` - API rate limit reached (HTTP 429)
+- `6`: `invalid_input` - Bad command flags, missing arguments, or malformed JSON
+- `7`: `no_account` - `--account <name>` not specified when multiple accounts exist
+
+## All Commands Reference
+
+### Authentication & Accounts
+- `heyreach auth check [--api-key <key>] [-a <account>]`: Validates API key.
+- `heyreach login [name] [--api-key <key>] [--api-key-stdin] [--no-browser] [--force] [--no-verify]`: Logs into account.
+- `heyreach accounts add <name> [--api-key <key>] [--api-key-stdin] [--force] [--no-verify]`: Adds account.
+- `heyreach accounts list [--check]`: Lists accounts.
+- `heyreach accounts test <name>`: Tests account connectivity.
+- `heyreach accounts remove <name> [--yes]`: Removes account.
+
+### Campaigns
+- `heyreach campaigns list [--limit <int>] [--offset <int>] [--status <active|paused|draft|completed>]`: List campaigns.
+- `heyreach campaigns get <id>`: Get campaign details.
+- `heyreach campaigns pause <id>`: Pause running campaign.
+- `heyreach campaigns resume <id>`: Resume paused campaign.
+- `heyreach campaigns add-leads <id> [--file <path>]`: Add array of leads.
+- `heyreach campaigns stop-lead <campaign-id> --lead <lead-id>`: Stop specific lead.
+
+### Lead Lists
+- `heyreach lists list [--limit <int>] [--offset <int>]`: List lead lists.
+- `heyreach lists get <id>`: Get list details.
+- `heyreach lists create --name <name> [--type user|company]`: Create empty list.
+- `heyreach lists leads <id> [--limit <int>] [--offset <int>] [--keyword <string>]`: Get leads in list.
+- `heyreach lists add-lead <id> --linkedin-url <url>`: Add lead to list.
+- `heyreach lists remove-lead <id> --lead <lead-id>`: Remove lead from list.
+- `heyreach lists companies <id> [--limit <int>] [--offset <int>]`: Get companies in company list.
+
+### Leads
+- `heyreach leads get --linkedin-url <url>`: Get lead by profile URL.
+- `heyreach leads lists --linkedin-url <url>`: Get lists containing lead.
+- `heyreach leads update-status --lead <lead-id> --status <status>`: Update lead status (pending, contacted, replied, connected, not_interested, bounced).
+
+### Sender Accounts
+- `heyreach senders list [--limit <int>] [--offset <int>]`: List sender LinkedIn accounts.
+- `heyreach senders get <id>`: Get sender details.
+- `heyreach senders network <id> [--limit <int>] [--offset <int>]`: Get sender connections.
+
+### Conversations
+- `heyreach conversations list [--limit <int>] [--offset <int>] [--campaign-id <id>] [--sender-id <id>]`: List conversations.
+- `heyreach conversations send --lead <lead-id> --message <text> [--sender-id <id>]`: Send message.
+
+### Analytics
+- `heyreach stats get [--from <YYYY-MM-DD>] [--to <YYYY-MM-DD>] [--campaign-id <id>] [--sender-id <id>]`: Get overall statistics.
+
+### Webhooks
+- `heyreach webhooks list [--limit <int>] [--offset <int>]`: List registered webhooks.
+- `heyreach webhooks get <id>`: Get webhook details.
+- `heyreach webhooks create --name <name> --url <url> --event <event> [--campaign-id <id>]`: Create webhook.
+- `heyreach webhooks update <id> [--name <name>] [--url <url>] [--event <event>] [--active <true|false>]`: Update webhook.
+- `heyreach webhooks delete <id>`: Delete webhook.
+
+### Tags
+- `heyreach tags create --name <name> [--color <hex>]`: Create tag.
